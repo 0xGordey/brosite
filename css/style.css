@@ -78,13 +78,13 @@ header::before {
   transform: translate(-50%, -50%);
   width: 100px;
   height: 100px;
-  background-color: #fc273f;
+  background-color: #e4e600;
   border-radius: 50%;
 }
 
 .arrow {
   font-size: 30px;
-  color: white;
+  color: black;
   animation: bounce 1s infinite;
   margin-bottom: 50px;
 }
@@ -118,7 +118,7 @@ header::before {
 .block-contact svg {
   display: block;
   margin: 0 auto;
-  color: #fc273f;
+  color: #e4e600;
 }
 .block-contact .swing {
   animation: swing 2s ease-in-out infinite;
@@ -140,6 +140,17 @@ header::before {
     transform: rotate(0deg);
   }
 }
+.block-contact .schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}
+.block-contact .schedule p {
+  font-size: clamp(0.1rem, 2.5vw, 0.7rem);
+  font-weight: 400;
+}
 .block-contact a {
   display: flex;
   justify-content: center;
@@ -148,7 +159,7 @@ header::before {
   font-weight: bold;
   text-decoration: none;
   color: #fff;
-  font-size: clamp(0.1rem, 2.5vw, 0.8rem);
+  font-size: clamp(0.1rem, 2.5vw, 0.7rem);
 }
 .block-contact .location {
   display: flex;
@@ -157,8 +168,8 @@ header::before {
   gap: 5px;
 }
 .block-contact .location p {
-  font-size: clamp(0.1rem, 2.5vw, 0.8rem);
-  font-weight: 500;
+  font-size: clamp(0.1rem, 2.5vw, 0.7rem);
+  font-weight: 400;
 }
 
 .navbar ul {
@@ -263,7 +274,7 @@ footer {
   flex-direction: row;
 }
 
-.logo {
+.block-logo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -271,10 +282,19 @@ footer {
   border-radius: 5px;
   padding: 0.5rem;
 }
-.logo svg {
+.block-logo svg {
   animation: rotate 5s linear infinite;
 }
-.logo h1 {
+.block-logo .logo {
+  background: url("../images/logo.png") no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 150px;
+  max-width: 350px;
+  height: 50px;
+  aspect-ratio: 1/1;
+}
+.block-logo h1 {
   font-weight: bold;
 }
 @keyframes rotate {

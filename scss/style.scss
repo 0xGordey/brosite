@@ -2,6 +2,7 @@
 // sass --watch scss/media.scss:css/media.css
 // Переменные
 $primary-color: #fc273f;
+$serwak-color: #e4e600;
 $section-color: #1e2025;
 $secondary-color: grey;
 $background-color: #191a1d;
@@ -93,13 +94,13 @@ header {
 	transform: translate(-50%, -50%);
 	width: 100px;
 	height: 100px;
-	background-color: $primary-color;
+	background-color: $serwak-color;
 	border-radius: 50%;
 }
 
 .arrow {
 	font-size: 30px;
-	color: white;
+	color: black;
 	animation: bounce 1s infinite;
 	margin-bottom: 50px;
 }
@@ -136,7 +137,7 @@ header {
 	svg {
 		display: block;
 		margin: 0 auto;
-		color: $primary-color;
+		color: $serwak-color;
 	}
 
 	.swing {
@@ -161,6 +162,18 @@ header {
 		}
 	}
 
+	.schedule {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: row;
+		gap: 5px;
+		p {
+			font-size: clamp(0.1rem, 2.5vw, 0.7rem);
+			font-weight: 400;
+		}
+	}
+
 	a {
 		display: flex;
 		justify-content: center;
@@ -169,7 +182,7 @@ header {
 		font-weight: bold;
 		text-decoration: none;
 		color: #fff;
-		font-size: clamp(0.1rem, 2.5vw, 0.8rem);
+		font-size: clamp(0.1rem, 2.5vw, 0.7rem);
 	}
 
 	.location {
@@ -178,8 +191,8 @@ header {
 		align-items: center;
 		gap: 5px;
 		p {
-			font-size: clamp(0.1rem, 2.5vw, 0.8rem);
-			font-weight: 500;
+			font-size: clamp(0.1rem, 2.5vw, 0.7rem);
+			font-weight: 400;
 		}
 	}
 }
@@ -292,7 +305,7 @@ footer {
 	flex-direction: row;
 }
 
-.logo {
+.block-logo {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -302,6 +315,16 @@ footer {
 	svg {
 		animation: rotate 5s linear infinite;
 	}
+	.logo {
+		background: url('../images/logo.png') no-repeat;
+		background-position: center center;
+		background-size: contain;
+		width: 150px; // или любое значение, подходящее для дизайна
+		max-width: 350px; // задайте максимальную ширину
+		height: 50px;
+		aspect-ratio: 1 / 1; // сохраняйте пропорции, если логотип квадратный
+	}
+
 	h1 {
 		font-weight: bold;
 	}
