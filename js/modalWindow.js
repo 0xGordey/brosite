@@ -43,9 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// Функция для переключения между табами
-	// Переключение табов
 	function switchTab(tab) {
 		const isServiceTab = tab === 'service'
+
+		// Очистка данных при переключении таба
+		clearFormFields()
 
 		// Обновляем заголовок и текст
 		modalTitle.textContent = isServiceTab
@@ -75,6 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Переключение активных классов
 		serviceTab.classList.toggle('active', isServiceTab)
 		consultationTab.classList.toggle('active', !isServiceTab)
+	}
+
+	// Очистка данных в полях формы
+	function clearFormFields() {
+		// Очистить поля выбора даты
+		const appointmentTime = document.getElementById('appointmentTime')
+		appointmentTime.value = ''
+
+		// Очистить поле выбора услуги
+		const serviceSelect = document.getElementById('serviceSelect')
+		serviceSelect.value = ''
+
+		const otherProblem = document.getElementById('otherProblem')
+		otherProblem.value = ''
+
+		// Скрыть описание для других услуг
+		const otherDescriptionGroup = document.getElementById('otherDescription')
+		otherDescriptionGroup.style.display = 'none'
 	}
 
 	// Навешиваем обработчик на все кнопки для открытия модального окна
@@ -111,6 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			otherDescriptionGroup.style.display = 'block'
 		} else {
 			otherDescriptionGroup.style.display = 'none'
+			const otherProblem = document.getElementById('otherProblem')
+			otherProblem.value = ''
 		}
 	})
 })

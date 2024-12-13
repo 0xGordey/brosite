@@ -1,4 +1,4 @@
-// Переписываем обработчик отправки формы
+const url_api = 'http://localhost:3000/messages'
 document
 	.getElementById('submitButton')
 	.addEventListener('click', function (event) {
@@ -6,6 +6,8 @@ document
 
 		// Блок сообщения
 		const formMessage = document.getElementById('formMessage')
+
+		const serviceTab = document.getElementById('serviceTab')
 
 		// Собираем данные из формы
 		const userName = document.getElementById('userName').value
@@ -21,10 +23,15 @@ document
 		// Проверяем текущий активный таб
 		const isServiceTabActive = serviceTab.classList.contains('active')
 
+		// Очищаем сообщение перед новой отправкой
+		formMessage.textContent = ''
+		formMessage.className = ''
+
 		// Валидация обязательных полей
 		if (
 			!userName ||
 			!userPhone ||
+			(serviceSelect === 'other' && !otherProblem) ||
 			(isServiceTabActive && (!appointmentTime || !serviceSelect))
 		) {
 			formMessage.textContent = 'Пожалуйста, заполните все обязательные поля!'
@@ -52,10 +59,11 @@ document
 			appointmentTime: appointmentTimestamp, // Добавляем timestamp
 			serviceSelect,
 			otherProblem,
+			tab: isServiceTabActive,
 		}
 
 		// Отправляем данные на сервер через fetch
-		fetch('YOUR_SERVER_URL', {
+		fetch(url_api, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -65,9 +73,12 @@ document
 			.then(response => response.json()) // Обрабатываем ответ от сервера
 			.then(data => {
 				// Выводим успех
-				formMessage.textContent = 'Данные успешно отправлены!'
-				formMessage.className = 'form-message success'
-				console.log(data)
+				if (data.message == 'send ok') {
+					formMessage.textContent = 'Данные успешно отправлены!'
+					formMessage.className = 'form-message success'
+				} else {
+					throw 'error'
+				}
 			})
 			.catch(error => {
 				// Выводим ошибку
