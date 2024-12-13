@@ -11,17 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	const modalTitle = document.getElementById('modalTitle')
 	const modalBody = document.getElementById('modalBody')
 
+	let currentTab = 'service' // Хранить текущий активный таб
+
 	// Функция для открытия модального окна
 	function openModal({ content, tab }) {
 		const selectElement = document.getElementById('serviceSelect')
 
-		// Снимаем выделение с предыдущего
-		selectElement.value = ''
+		if (content === '-') {
+			clearFormFields()
+		}
 
-		// Если передано значение content, устанавливаем его в поле выбора
+		// Если передан контент, устанавливаем его в поле выбора
 		if (content) {
 			for (let option of selectElement.options) {
 				if (option.textContent.trim() === content) {
+					selectElement.value = content
 					option.selected = true
 					break
 				}
@@ -39,15 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Функция для закрытия модального окна
 	function closeModalHandler() {
 		modal.style.display = 'none'
-		document.body.classList.remove('no-scroll') // Разблокируем прокрутку
+		document.body.classList.remove('no-scroll')
 	}
 
 	// Функция для переключения между табами
 	function switchTab(tab) {
 		const isServiceTab = tab === 'service'
 
-		// Очистка данных при переключении таба
-		clearFormFields()
+		// Очистка данных при переключении таба, если это не первый раз
+		if (currentTab !== tab) {
+			clearFormFields() // Очищаем только при переключении
+		}
 
 		// Обновляем заголовок и текст
 		modalTitle.textContent = isServiceTab
@@ -60,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Отображение/скрытие полей
 		appointmentTimeGroup.style.display = isServiceTab ? 'block' : 'none'
 		serviceSelectGroup.style.display = isServiceTab ? 'block' : 'none'
-		otherDescriptionGroup.style.display = 'none' // Скрываем описание
+		otherDescriptionGroup.style.display = 'none' // Скрываем описание для других услуг
 
 		// Установка или удаление атрибута required
 		const appointmentTime = document.getElementById('appointmentTime')
@@ -77,6 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Переключение активных классов
 		serviceTab.classList.toggle('active', isServiceTab)
 		consultationTab.classList.toggle('active', !isServiceTab)
+
+		// Обновляем текущий активный таб
+		currentTab = tab
 	}
 
 	// Очистка данных в полях формы
@@ -93,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		otherProblem.value = ''
 
 		// Скрыть описание для других услуг
-		const otherDescriptionGroup = document.getElementById('otherDescription')
 		otherDescriptionGroup.style.display = 'none'
 	}
 
@@ -102,16 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		.querySelectorAll('.openModalBtn, div.openModalBtn')
 		.forEach(element => {
 			element.addEventListener('click', () => {
-				const content = element.getAttribute('data-content')
-				const tab = element.getAttribute('data-tab') // Получаем информацию о нужном табе
-				openModal({ content, tab })
+				const content = element.getAttribute('data-content') // Получаем значение из data-content
+				const tab = element.getAttribute('data-tab') // Получаем нужный таб
+				openModal({ content, tab }) // Передаем в openModal
 			})
 		})
 
 	// Закрытие модального окна при клике на крестик
 	closeModal.addEventListener('click', closeModalHandler)
 
-	// Закрытие модального окна при клике на тёмную область
+	// Закрытие модального окна при клике на темную область
 	window.addEventListener('click', event => {
 		if (event.target === modal) {
 			closeModalHandler()
@@ -124,15 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Отслеживание изменения выбора в выпадающем списке
 	const serviceSelect = document.getElementById('serviceSelect')
-
 	serviceSelect.addEventListener('change', () => {
 		// Показываем или скрываем поле в зависимости от выбранной опции
 		if (serviceSelect.value === 'other') {
 			otherDescriptionGroup.style.display = 'block'
 		} else {
 			otherDescriptionGroup.style.display = 'none'
-			const otherProblem = document.getElementById('otherProblem')
-			otherProblem.value = ''
 		}
 	})
 })
