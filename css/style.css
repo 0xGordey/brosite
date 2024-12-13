@@ -15,6 +15,10 @@ h6 {
   padding: 0;
 }
 
+button {
+  all: unset;
+}
+
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -22,6 +26,10 @@ body {
   color: grey;
   margin: 0;
   padding: 0;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 .container {
@@ -204,30 +212,30 @@ header::before {
 }
 
 .center-content h1 {
-  font-size: 9rem;
-  line-height: 1.2;
+  font-size: 7vw;
+  line-height: 1.1;
   margin-bottom: 1rem;
   text-transform: uppercase;
 }
 
 .center-content p {
   max-width: 350px;
-  font-size: 1rem;
+  font-size: 0.8vw;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   color: grey;
 }
 
-button {
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2.5px;
+  gap: 10px;
   background-color: #fc273f;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.8rem;
   border: none;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 1rem;
   border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
@@ -254,6 +262,9 @@ footer {
   color: #fff;
   text-align: center;
   padding: 1rem 0;
+}
+footer p {
+  font-size: 0.8rem;
 }
 
 .menu-toggle {
@@ -470,50 +481,168 @@ footer {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: #1e2025;
+  gap: 10px;
 }
-.two .center .center-form .main {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap: 20px;
-}
-.two .center .center-form .main .input-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-.two .center .center-form .main .input-group label {
-  text-align: start;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-.two .center .center-form .main .input-group .glow-input {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid transparent;
-  border-radius: 4px;
-  background-color: #fff;
-  outline: none;
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-.two .center .center-form .main .input-group .glow-input:focus {
-  border-color: #ff4d4d;
-  box-shadow: 0 0 8px rgba(255, 77, 77, 0.8);
-}
-.two .center .center-form .main .bottom {
+.two .center .center-form .bottom {
   width: 100%;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.956);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999998;
+}
+
+.form-message {
+  width: 100%;
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+  display: none; /* По умолчанию скрыто */
+  font-weight: bold;
+}
+
+.form-message.success {
+  color: green;
+  display: block;
+}
+
+.form-message.error {
+  color: red;
+  display: block;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  /* Иконка для активного состояния */
+  /* Иконка для неактивного состояния */
+}
+.tabs .tab-button.active .active-icon {
+  display: block;
+}
+.tabs .tab-button.active .inactive-icon {
+  display: none;
+}
+.tabs .tab-button:not(.active) .active-icon {
+  display: none;
+}
+.tabs .tab-button:not(.active) .inactive-icon {
+  display: block;
+}
+.tabs .tab-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: none;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 0.8rem;
+  width: 100%;
+  font-weight: bold;
+}
+.tabs .tab-button.active {
+  background-color: #e4e600;
+  color: #191a1d;
+}
+
+.modal-content {
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 9999999;
+}
+.modal-content .top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background: #191a1d;
+  border-radius: 10px 10px 0 0;
+}
+.modal-content .top .close {
+  position: absolute;
+  right: 10px;
+  bottom: -15px;
+  font-size: 50px;
+  cursor: pointer;
+}
+.modal-content .body {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  background: white;
+  overflow-y: auto;
+  border-radius: 0 0 10px 10px;
+}
+.modal-content .body .input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: start;
+}
+.modal-content .body .input-group label {
+  text-align: start;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.modal-content .body .input-group .glow-input {
+  max-width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.modal-content .body .input-group .glow-input:focus {
+  border-color: #e4e600;
+  box-shadow: 0 0 8px #e4e600;
+}
+.modal-content .body .input-group textarea.glow-input {
+  width: 100%;
+  min-height: 50px;
+  max-height: 50px;
+  resize: vertical;
+}
+.modal-content .body .footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  background: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */

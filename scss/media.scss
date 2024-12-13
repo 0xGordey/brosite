@@ -132,6 +132,17 @@
 	header {
 		height: 500px;
 	}
+	.modal-content {
+		height: 100dvh;
+		.body {
+			height: 100%;
+		}
+	}
+	.tabs {
+		.tab-button {
+			font-size: 0.7rem;
+		}
+	}
 	.one {
 		.body {
 			.grid-container {
@@ -152,6 +163,17 @@
 				}
 			}
 		}
+	}
+
+	.two {
+		width: 100%;
+		padding: 0;
+		.center {
+			width: 100%;
+		}
+	}
+	.center-content h1 {
+		font-size: 3rem;
 	}
 }
 

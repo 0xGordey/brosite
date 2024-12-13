@@ -63,4 +63,13 @@ document
 		}
 	})
 
-console.log('Hello, World!')
+document
+	.getElementById('serviceSelect')
+	.addEventListener('change', function () {
+		const otherDescription = document.getElementById('otherDescription')
+		if (this.value === 'other') {
+			otherDescription.style.display = 'block'
+		} else {
+			otherDescription.style.display = 'none'
+		}
+	})
